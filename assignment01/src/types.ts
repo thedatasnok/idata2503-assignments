@@ -1,8 +1,8 @@
 export const enum ExpenseType {
-  FOOD,
-  TRAVEL,
-  LEISURE,
-  WORK,
+  FOOD = 'Food',
+  TRAVEL = 'Travel',
+  LEISURE = 'Leisure',
+  WORK = 'Work',
 }
 
 export interface Expense {
