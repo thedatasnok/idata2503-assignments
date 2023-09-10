@@ -1,4 +1,5 @@
 import ExpenseListItem from '@/components/ExpenseListItem';
+import UndoExpenseDeletionToast from '@/components/UndoExpenseDeletionToast';
 import { Expense, ExpenseType } from '@/types';
 import {
   AddIcon,
@@ -6,6 +7,7 @@ import {
   Button,
   ButtonIcon,
   Heading,
+  useToast,
 } from '@gluestack-ui/themed';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -25,6 +27,7 @@ const LAYOUT_ANIMATION_CONFIG: LayoutAnimationConfig = {
 
 const HomeScreen = () => {
   const router = useRouter();
+  const toast = useToast();
   const [expenses, setExpenses] = useState<Expense[]>([
     {
       id: '1',
@@ -61,10 +64,25 @@ const HomeScreen = () => {
   };
 
   const onExpenseDeleted = (id: string) => {
+    const deletedExpense = expenses.find((expense) => expense.id === id);
+    if (!deletedExpense) return;
+
     const newExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(newExpenses);
 
     LayoutAnimation.configureNext(LAYOUT_ANIMATION_CONFIG);
+
+    toast.show({
+      duration: null,
+      // duration: 20_000,
+      id: deletedExpense?.id,
+      render: () => (
+        <UndoExpenseDeletionToast
+          id={deletedExpense.id}
+          title={deletedExpense?.title}
+        />
+      ),
+    });
   };
 
   return (
