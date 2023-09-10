@@ -58,12 +58,12 @@ const ExpenseListItem: React.FC<ExpenseListItemProps> = ({
         alignItems='flex-end'
         flexDirection='row'
         justifyContent='space-between'
-        bg='$gray100'
+        bg='$blueGray100'
         my='$1'
         py='$1'
         px='$2'
         rounded='$md'
-        borderColor='$gray200'
+        borderColor='$blueGray200'
         borderWidth='$1'
       >
         <VStack flex={1}>
