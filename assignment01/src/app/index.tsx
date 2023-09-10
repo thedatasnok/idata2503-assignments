@@ -7,6 +7,7 @@ import {
   ButtonIcon,
   Heading,
 } from '@gluestack-ui/themed';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, LayoutAnimation, LayoutAnimationConfig } from 'react-native';
 
@@ -23,6 +24,7 @@ const LAYOUT_ANIMATION_CONFIG: LayoutAnimationConfig = {
 };
 
 const HomeScreen = () => {
+  const router = useRouter();
   const [expenses, setExpenses] = useState<Expense[]>([
     {
       id: '1',
@@ -54,6 +56,10 @@ const HomeScreen = () => {
     },
   ]);
 
+  const onAddPressed = () => {
+    router.push('/add');
+  };
+
   const onExpenseDeleted = (id: string) => {
     const newExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(newExpenses);
@@ -74,8 +80,13 @@ const HomeScreen = () => {
       >
         <Heading color='$white'>Expense tracker</Heading>
 
-        <Button size='sm' rounded='$full' aspectRatio='1/1'>
-          <ButtonIcon as={AddIcon} />
+        <Button
+          size='sm'
+          rounded='$full'
+          aspectRatio='1/1'
+          onPress={onAddPressed}
+        >
+          <ButtonIcon as={AddIcon} size='md' />
         </Button>
       </Box>
 
