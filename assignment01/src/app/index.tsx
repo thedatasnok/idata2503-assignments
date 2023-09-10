@@ -1,6 +1,6 @@
 import ExpenseListItem from '@/components/ExpenseListItem';
 import UndoExpenseDeletionToast from '@/components/UndoExpenseDeletionToast';
-import { Expense, ExpenseType } from '@/types';
+import { useExpenseStore } from '@/store';
 import {
   AddIcon,
   Box,
@@ -10,7 +10,6 @@ import {
   useToast,
 } from '@gluestack-ui/themed';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { FlatList, LayoutAnimation, LayoutAnimationConfig } from 'react-native';
 
 const LAYOUT_ANIMATION_CONFIG: LayoutAnimationConfig = {
@@ -28,47 +27,14 @@ const LAYOUT_ANIMATION_CONFIG: LayoutAnimationConfig = {
 const HomeScreen = () => {
   const router = useRouter();
   const toast = useToast();
-  const [expenses, setExpenses] = useState<Expense[]>([
-    {
-      id: '1',
-      title: 'Groceries',
-      amount: 100.29,
-      date: new Date(),
-      type: ExpenseType.FOOD,
-    },
-    {
-      id: '2',
-      title: 'Groceries',
-      amount: 100.29,
-      date: new Date(),
-      type: ExpenseType.LEISURE,
-    },
-    {
-      id: '3',
-      title: 'Groceries',
-      amount: 100.29,
-      date: new Date(),
-      type: ExpenseType.TRAVEL,
-    },
-    {
-      id: '4',
-      title: 'Groceries',
-      amount: 100.29,
-      date: new Date(),
-      type: ExpenseType.WORK,
-    },
-  ]);
+  const { expenses, removeExpense } = useExpenseStore();
 
   const onAddPressed = () => {
     router.push('/add');
   };
 
   const onExpenseDeleted = (id: string) => {
-    const deletedExpense = expenses.find((expense) => expense.id === id);
-    if (!deletedExpense) return;
-
-    const newExpenses = expenses.filter((expense) => expense.id !== id);
-    setExpenses(newExpenses);
+    const deletedExpense = removeExpense(id);
 
     LayoutAnimation.configureNext(LAYOUT_ANIMATION_CONFIG);
 
