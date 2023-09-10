@@ -1,3 +1,4 @@
+import { useExpenseStore } from '@/store';
 import { ExpenseType } from '@/types';
 import {
   Box,
@@ -30,15 +31,29 @@ const AddExpenseScreen = () => {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
-  const [_date, _setDate] = useState(new Date());
+  const [date, _setDate] = useState(new Date());
   const [type, setType] = useState(ExpenseType.FOOD);
+
+  const { addExpense } = useExpenseStore();
 
   const onCancelled = () => {
     router.back();
   };
 
   const onSaved = () => {
-    // TODO: Save expense to store
+    const parsedAmount = parseFloat(amount);
+
+    // TODO: Add validation hint instead of silently failing
+    if (Number.isNaN(parsedAmount)) return;
+
+    addExpense({
+      title,
+      amount: parseFloat(amount),
+      date,
+      type,
+    });
+
+    router.push('/');
   };
 
   const amountChanged = (text: string) => {

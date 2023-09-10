@@ -7,7 +7,7 @@ export interface ExpenseState {
 }
 
 export interface ExpenseActions {
-  addExpense: (expense: Expense) => void;
+  addExpense: (expense: Omit<Expense, 'id'>) => void;
   removeExpense: (id: string) => Expense;
 }
 
