@@ -1,3 +1,4 @@
+import ExpenseBarChart from '@/components/ExpenseBarChart';
 import ExpenseListItem from '@/components/ExpenseListItem';
 import UndoExpenseDeletionToast from '@/components/UndoExpenseDeletionToast';
 import { useExpenseStore } from '@/store';
@@ -76,6 +77,15 @@ const HomeScreen = () => {
 
       {/* Content */}
       <Box flex={1} p='$2'>
+        <Box
+          bg='$blueGray100'
+          borderWidth='$1'
+          borderColor='$blueGray200'
+          rounded='$md'
+        >
+          <ExpenseBarChart />
+        </Box>
+
         <Heading size='sm'>Expenses</Heading>
 
         <FlatList
