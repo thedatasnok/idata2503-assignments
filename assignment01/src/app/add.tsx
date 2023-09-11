@@ -3,11 +3,11 @@ import { ExpenseType } from '@/types';
 import {
   Box,
   Button,
+  ButtonIcon,
   ButtonText,
   FormControl,
   FormControlLabel,
   FormControlLabelText,
-  Heading,
   Icon,
   Input,
   InputField,
@@ -23,8 +23,12 @@ import {
   SelectPortal,
   SelectTrigger,
 } from '@gluestack-ui/themed';
-import { useRouter } from 'expo-router';
-import { ChevronDownIcon, DollarSignIcon } from 'lucide-react-native';
+import { Stack, useRouter } from 'expo-router';
+import {
+  ArrowLeftIcon,
+  ChevronDownIcon,
+  DollarSignIcon,
+} from 'lucide-react-native';
 import { useState } from 'react';
 
 const AddExpenseScreen = () => {
@@ -67,16 +71,21 @@ const AddExpenseScreen = () => {
 
   return (
     <>
-      <Box
-        bg='$primary500'
-        px='$2'
-        py='$1'
-        flexDirection='row'
-        justifyContent='space-between'
-        alignItems='center'
-      >
-        <Heading color='$white'>Add expense</Heading>
-      </Box>
+      <Stack.Screen
+        options={{
+          title: 'Add expense',
+          headerLeft: () => (
+            <Button
+              size='sm'
+              rounded='$full'
+              aspectRatio='1/1'
+              onPress={onCancelled}
+            >
+              <ButtonIcon as={ArrowLeftIcon} size='20' />
+            </Button>
+          ),
+        }}
+      />
 
       <Box p='$2'>
         <FormControl>

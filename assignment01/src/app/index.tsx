@@ -10,7 +10,7 @@ import {
   Heading,
   useToast,
 } from '@gluestack-ui/themed';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { FlatList, LayoutAnimation, LayoutAnimationConfig } from 'react-native';
 
 const LAYOUT_ANIMATION_CONFIG: LayoutAnimationConfig = {
@@ -28,7 +28,7 @@ const LAYOUT_ANIMATION_CONFIG: LayoutAnimationConfig = {
 const HomeScreen = () => {
   const router = useRouter();
   const toast = useToast();
-  const { expenses, removeExpense } = useExpenseStore();
+  const { expenses, addExpense, removeExpense } = useExpenseStore();
 
   const onAddPressed = () => {
     router.push('/add');
@@ -40,13 +40,17 @@ const HomeScreen = () => {
     LayoutAnimation.configureNext(LAYOUT_ANIMATION_CONFIG);
 
     toast.show({
-      duration: null,
-      // duration: 20_000,
+      duration: 20_000,
       id: deletedExpense?.id,
       render: () => (
         <UndoExpenseDeletionToast
+          key={deletedExpense?.id}
           id={deletedExpense.id}
           title={deletedExpense?.title}
+          onUndo={() => {
+            addExpense(deletedExpense);
+            toast.close(deletedExpense?.id);
+          }}
         />
       ),
     });
@@ -54,26 +58,21 @@ const HomeScreen = () => {
 
   return (
     <>
-      {/* Header */}
-      <Box
-        bg='$primary500'
-        px='$2'
-        py='$1'
-        flexDirection='row'
-        justifyContent='space-between'
-        alignItems='center'
-      >
-        <Heading color='$white'>Expense tracker</Heading>
-
-        <Button
-          size='sm'
-          rounded='$full'
-          aspectRatio='1/1'
-          onPress={onAddPressed}
-        >
-          <ButtonIcon as={AddIcon} size='md' />
-        </Button>
-      </Box>
+      <Stack.Screen
+        options={{
+          title: 'Home',
+          headerRight: () => (
+            <Button
+              size='sm'
+              rounded='$full'
+              aspectRatio='1/1'
+              onPress={onAddPressed}
+            >
+              <ButtonIcon as={AddIcon} size='md' />
+            </Button>
+          ),
+        }}
+      />
 
       {/* Content */}
       <Box flex={1} p='$2'>
