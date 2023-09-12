@@ -71,6 +71,9 @@ dependencies:
   react-native-mmkv:
     specifier: ^2.10.2
     version: 2.10.2(react-native@0.72.4)(react@18.2.0)
+  react-native-modal-datetime-picker:
+    specifier: ^17.1.0
+    version: 17.1.0(@react-native-community/datetimepicker@7.2.0)(react-native@0.72.4)
   react-native-safe-area-context:
     specifier: 4.6.3
     version: 4.6.3(react-native@0.72.4)(react@18.2.0)
@@ -9294,6 +9297,17 @@ packages:
       react-native: '>=0.71.0'
     dependencies:
       react: 18.2.0
+      react-native: 0.72.4(@babel/core@7.20.2)(@babel/preset-env@7.22.15)(react@18.2.0)
+    dev: false
+
+  /react-native-modal-datetime-picker@17.1.0(@react-native-community/datetimepicker@7.2.0)(react-native@0.72.4):
+    resolution: {integrity: sha512-jfTwfaCLtBffYbQ+pOGFLM+J5HmUh3vb9rT0JrrQPjxzecdc8pNYreB1c96+mVuq8bDCvaCdIeuEsslTqLJL0Q==}
+    peerDependencies:
+      '@react-native-community/datetimepicker': '>=6.7.0'
+      react-native: '>=0.65.0'
+    dependencies:
+      '@react-native-community/datetimepicker': 7.2.0
+      prop-types: 15.8.1
       react-native: 0.72.4(@babel/core@7.20.2)(@babel/preset-env@7.22.15)(react@18.2.0)
     dev: false
 
