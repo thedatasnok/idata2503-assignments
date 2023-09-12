@@ -26,17 +26,21 @@ import {
 import { Stack, useRouter } from 'expo-router';
 import {
   ArrowLeftIcon,
+  CalendarIcon,
   ChevronDownIcon,
   DollarSignIcon,
 } from 'lucide-react-native';
-import { useState } from 'react';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { useRef, useState } from 'react';
 
 const AddExpenseScreen = () => {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
-  const [date, _setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [type, setType] = useState(ExpenseType.FOOD);
+  const focusRef = useRef(null);
 
   const { addExpense } = useExpenseStore();
 
@@ -60,12 +64,16 @@ const AddExpenseScreen = () => {
     router.push('/');
   };
 
+  const handleDateChange = (date: Date) => {
+    setDate(date);
+    setShowDatePicker(false);
+  };
+
   const amountChanged = (text: string) => {
     setAmount(
       text
-        .replace(/[^0-9.,]/g, '')
+        .replace(/[^0-9.]/g, '')
         .replace(/(?<=(.*\..*))\./g, '') // remove all but the first dot
-        .replace(/(?<=(.*,.*)),/g, '') // remove all but the first comma
     );
   };
 
@@ -102,8 +110,8 @@ const AddExpenseScreen = () => {
           </Input>
         </FormControl>
 
-        <Box justifyContent='space-between'>
-          <FormControl>
+        <Box flexDirection='row' justifyContent='space-between' gap='$2'>
+          <FormControl flex={1} flexBasis={0}>
             <FormControlLabel mb='$0'>
               <FormControlLabelText>Amount</FormControlLabelText>
             </FormControlLabel>
@@ -122,7 +130,32 @@ const AddExpenseScreen = () => {
             </Input>
           </FormControl>
 
-          {/* TODO: Add date input */}
+          <FormControl flex={1} flexBasis='$0'>
+            <FormControlLabel mb='$0'>
+              <FormControlLabelText>Date</FormControlLabelText>
+            </FormControlLabel>
+            <Button
+              size='md'
+              variant='outline'
+              action='secondary'
+              onPress={() => setShowDatePicker(true)}
+              ref={focusRef}
+            >
+              <ButtonIcon size='sm'>
+                <Icon as={CalendarIcon} size='14' />
+              </ButtonIcon>
+              <ButtonText>{date.toLocaleDateString()}</ButtonText>
+            </Button>
+
+            <DateTimePickerModal
+              isVisible={showDatePicker}
+              date={date}
+              display='inline'
+              onConfirm={handleDateChange}
+              onCancel={() => setShowDatePicker(false)}
+              mode='date'
+            />
+          </FormControl>
         </Box>
 
         <FormControl>
