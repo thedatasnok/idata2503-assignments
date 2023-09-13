@@ -6,6 +6,8 @@ import {
   ButtonIcon,
   ButtonText,
   FormControl,
+  FormControlError,
+  FormControlErrorText,
   FormControlLabel,
   FormControlLabelText,
   Icon,
@@ -30,8 +32,8 @@ import {
   ChevronDownIcon,
   DollarSignIcon,
 } from 'lucide-react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { useRef, useState } from 'react';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const AddExpenseScreen = () => {
   const router = useRouter();
@@ -41,17 +43,21 @@ const AddExpenseScreen = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [type, setType] = useState(ExpenseType.FOOD);
   const focusRef = useRef(null);
-
   const { addExpense } = useExpenseStore();
+
+  const isInvalidTitle = title.trim().length === 0;
+  const isInvalidAmount = amount.length === 0;
+  const isInvalid = isInvalidTitle || isInvalidAmount;
 
   const onCancelled = () => {
     router.back();
   };
 
   const onSaved = () => {
+    if (isInvalidTitle) return;
+
     const parsedAmount = parseFloat(amount);
 
-    // TODO: Add validation hint instead of silently failing
     if (Number.isNaN(parsedAmount)) return;
 
     addExpense({
@@ -71,9 +77,7 @@ const AddExpenseScreen = () => {
 
   const amountChanged = (text: string) => {
     setAmount(
-      text
-        .replace(/[^0-9.]/g, '')
-        .replace(/(?<=(.*\..*))\./g, '') // remove all but the first dot
+      text.replace(/[^0-9.]/g, '').replace(/(?<=(.*\..*))\./g, '') // remove all but the first dot
     );
   };
 
@@ -96,7 +100,7 @@ const AddExpenseScreen = () => {
       />
 
       <Box p='$2'>
-        <FormControl>
+        <FormControl isInvalid={isInvalidTitle}>
           <FormControlLabel mb='$0'>
             <FormControlLabelText>Title</FormControlLabelText>
           </FormControlLabel>
@@ -108,10 +112,13 @@ const AddExpenseScreen = () => {
               placeholder='Groceries'
             />
           </Input>
+          <FormControlError>
+            <FormControlErrorText>Title cannot be blank</FormControlErrorText>
+          </FormControlError>
         </FormControl>
 
         <Box flexDirection='row' justifyContent='space-between' gap='$2'>
-          <FormControl flex={1} flexBasis={0}>
+          <FormControl flex={1} flexBasis={0} isInvalid={isInvalidAmount}>
             <FormControlLabel mb='$0'>
               <FormControlLabelText>Amount</FormControlLabelText>
             </FormControlLabel>
@@ -128,6 +135,11 @@ const AddExpenseScreen = () => {
                 placeholder='100'
               />
             </Input>
+            <FormControlError>
+              <FormControlErrorText>
+                Amount cannot be blank
+              </FormControlErrorText>
+            </FormControlError>
           </FormControl>
 
           <FormControl flex={1} flexBasis='$0'>
@@ -168,7 +180,7 @@ const AddExpenseScreen = () => {
           >
             <SelectTrigger variant='outline'>
               <SelectInput />
-              {/* @ts-ignore the mr prop works but reports an error*/}
+              {/* @ts-ignore the mr prop works but reports a type error */}
               <SelectIcon size='12' mr='$2'>
                 <Icon as={ChevronDownIcon} />
               </SelectIcon>
@@ -199,7 +211,7 @@ const AddExpenseScreen = () => {
           >
             <ButtonText>Cancel</ButtonText>
           </Button>
-          <Button size='sm' onPress={onSaved}>
+          <Button size='sm' onPress={onSaved} disabled={isInvalid}>
             <ButtonText>Save</ButtonText>
           </Button>
         </Box>
