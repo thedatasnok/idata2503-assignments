@@ -65,8 +65,8 @@ const AddExpenseScreen = () => {
   };
 
   const handleDateChange = (date: Date) => {
-    setDate(date);
     setShowDatePicker(false);
+    setDate(date);
   };
 
   const amountChanged = (text: string) => {
@@ -142,7 +142,7 @@ const AddExpenseScreen = () => {
               ref={focusRef}
             >
               <ButtonIcon size='sm'>
-                <Icon as={CalendarIcon} size='14' />
+                <Icon as={CalendarIcon} size='20' />
               </ButtonIcon>
               <ButtonText>{date.toLocaleDateString()}</ButtonText>
             </Button>
