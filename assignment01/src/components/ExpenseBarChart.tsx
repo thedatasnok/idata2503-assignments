@@ -1,38 +1,19 @@
-import { useExpenseStore } from '@/store';
 import { ExpenseType } from '@/types';
 import { getExpenseTypeIcon } from '@/utils';
 import { Icon, config } from '@gluestack-ui/themed';
 import { Defs, G, LinearGradient, Stop } from 'react-native-svg';
-import {
-  VictoryAxis,
-  VictoryBar,
-  VictoryChart,
-  VictoryContainer,
-} from 'victory-native';
+import { VictoryAxis, VictoryBar, VictoryChart } from 'victory-native';
 
-type ExpenseSumByType = { x: ExpenseType; y: number };
+export type ExpenseSumByType = { x: ExpenseType; y: number };
+
+export interface ExpenseBarChartProps {
+  data: ExpenseSumByType[];
+}
 
 /**
  * Component that renders a bar chart of expenses by type.
  */
-const ExpenseBarChart = () => {
-  const sumByType = useExpenseStore<ExpenseSumByType[]>((state) => {
-    const sumByType = {
-      [ExpenseType.FOOD]: 0,
-      [ExpenseType.LEISURE]: 0,
-      [ExpenseType.TRAVEL]: 0,
-      [ExpenseType.WORK]: 0,
-    };
-
-    state.expenses.forEach((expense) => {
-      sumByType[expense.type] += expense.amount;
-    });
-
-    return Object.entries(sumByType).map(([type, amount]) => ({
-      x: type as ExpenseType,
-      y: amount,
-    }));
-  });
+const ExpenseBarChart: React.FC<ExpenseBarChartProps> = ({ data }) => {
 
   return (
     <VictoryChart
@@ -61,7 +42,7 @@ const ExpenseBarChart = () => {
         style={{
           axis: { stroke: 'transparent' },
         }}
-        tickLabelComponent={<TickLabelComponent data={sumByType} />}
+        tickLabelComponent={<TickLabelComponent data={data} />}
       />
 
       <VictoryBar
@@ -74,7 +55,7 @@ const ExpenseBarChart = () => {
           },
           labels: {},
         }}
-        data={sumByType}
+        data={data}
       />
     </VictoryChart>
   );
