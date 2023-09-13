@@ -32,6 +32,9 @@ dependencies:
   '@react-navigation/native':
     specifier: ^6.0.2
     version: 6.0.2(react-native@0.72.4)(react@18.2.0)
+  dayjs:
+    specifier: ^1.11.9
+    version: 1.11.9
   expo:
     specifier: ~49.0.9
     version: 49.0.9(@babel/core@7.20.2)
@@ -6823,6 +6826,7 @@ packages:
 
   /glob@6.0.4:
     resolution: {integrity: sha512-MKZeRNyYZAVVVG1oZeLaWie1uweH40m9AZwIwxyPbTSX4hHrVYSzLg0Ro5Z5R7XKkIX+Cc6oD1rqeDJnwsB8/A==}
+    requiresBuild: true
     dependencies:
       inflight: 1.0.6
       inherits: 2.0.4
@@ -7671,7 +7675,7 @@ packages:
       prop-types: ^15.7.2
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
       react-native: '*'
-      react-native-svg: ^12.0.0 || ^13.0.0
+      react-native-svg: 13.13.0
     dependencies:
       prop-types: 15.8.1
       react: 18.2.0
@@ -8581,6 +8585,7 @@ packages:
   /ncp@2.0.0:
     resolution: {integrity: sha512-zIdGUrPRFTUELUvr3Gmc7KZ2Sw/h1PiVM0Af/oHB6zgnV1ikqSfRk+TOufi79aHYCW3NiOXmr1BP5nWbzojLaA==}
     hasBin: true
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -9655,6 +9660,7 @@ packages:
   /rimraf@2.4.5:
     resolution: {integrity: sha512-J5xnxTyqaiw06JjMftq7L9ouA448dw/E7dKghkP9WpKNuwmARNNg+Gk8/u5ryb9N/Yo2+z3MCwuqFK/+qPOPfQ==}
     hasBin: true
+    requiresBuild: true
     dependencies:
       glob: 6.0.4
     dev: false
