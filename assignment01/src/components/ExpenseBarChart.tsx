@@ -29,7 +29,10 @@ const ExpenseBarChart = () => {
   return (
     <VictoryChart
       animate={{
-        duration: 1000,
+        duration: 500,
+        onLoad: {
+          duration: 300,
+        },
         easing: 'cubic',
       }}
     >
