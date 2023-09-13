@@ -7,6 +7,13 @@ import {
 import { IconType } from './icons';
 import { ExpenseType } from './types';
 
+/**
+ * Gets the icon for a given expense type.
+ *
+ * @param type the expense type to get an icon for
+ *
+ * @returns the icon for the given expense type
+ */
 export const getExpenseTypeIcon = (type: ExpenseType): IconType => {
   switch (type) {
     case ExpenseType.FOOD:

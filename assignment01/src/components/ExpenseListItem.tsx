@@ -17,10 +17,19 @@ export interface ExpenseListItemProps {
   type: ExpenseType;
   amount: number;
   date: Date;
+  /**
+   * Called when the user presses the list item.
+   */
   onPress?: () => void;
+  /**
+   * Called when the user swipes the list item to the left.
+   */
   onDelete?: () => void;
 }
 
+/**
+ * Component for rendering a single expense as a list item.
+ */
 const ExpenseListItem: React.FC<ExpenseListItemProps> = ({
   title,
   type,

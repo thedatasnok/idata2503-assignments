@@ -9,12 +9,28 @@ export interface ExpenseState {
 }
 
 export interface ExpenseActions {
+  /**
+   * Adds a new expense to the store.
+   * A random id will be generated for the expense.
+   *
+   * @param expense the expense to add, without an id
+   */
   addExpense: (expense: Omit<Expense, 'id'>) => void;
+  /**
+   * Removes an expense from the store.
+   *
+   * @param id the id of the expense to remove
+   *
+   * @returns the removed expense
+   */
   removeExpense: (id: string) => Expense;
 }
 
 export type ExpenseStore = ExpenseState & ExpenseActions;
 
+/**
+ * Shared store for expenses.
+ */
 export const useExpenseStore = create<ExpenseStore>()(
   persist(
     (set, get) => ({
@@ -48,7 +64,7 @@ export const useExpenseStore = create<ExpenseStore>()(
           type: ExpenseType.WORK,
         },
       ],
-      addExpense: (expense: Omit<Expense, 'id'>) => {
+      addExpense: (expense) => {
         set({
           expenses: [
             ...get().expenses,
@@ -59,7 +75,7 @@ export const useExpenseStore = create<ExpenseStore>()(
           ],
         });
       },
-      removeExpense: (id: string) => {
+      removeExpense: (id) => {
         const deletedExpense = get().expenses.find(
           (expense) => expense.id === id
         );

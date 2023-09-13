@@ -15,6 +15,10 @@ export interface UndoExpenseDeletionToastProps {
   onUndo?: () => void;
 }
 
+/**
+ * Component for rendering a custom toast for when an expense is deleted.
+ * Adds custom styling and an undo button to the toast.
+ */
 const UndoExpenseDeletionToast: React.FC<UndoExpenseDeletionToastProps> = ({
   id,
   title,

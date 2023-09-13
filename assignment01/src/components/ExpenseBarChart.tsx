@@ -3,10 +3,18 @@ import { ExpenseType } from '@/types';
 import { getExpenseTypeIcon } from '@/utils';
 import { Icon, config } from '@gluestack-ui/themed';
 import { Defs, G, LinearGradient, Stop } from 'react-native-svg';
-import { VictoryAxis, VictoryBar, VictoryChart } from 'victory-native';
+import {
+  VictoryAxis,
+  VictoryBar,
+  VictoryChart,
+  VictoryContainer,
+} from 'victory-native';
 
 type ExpenseSumByType = { x: ExpenseType; y: number };
 
+/**
+ * Component that renders a bar chart of expenses by type.
+ */
 const ExpenseBarChart = () => {
   const sumByType = useExpenseStore<ExpenseSumByType[]>((state) => {
     const sumByType = {
@@ -79,6 +87,9 @@ interface TickLabelComponentProps {
   data: ExpenseSumByType[];
 }
 
+/**
+ * Component rendering an SVG icon for tick labels instead of regular text labels.
+ */
 const TickLabelComponent: React.FC<TickLabelComponentProps> = ({
   x,
   y,
