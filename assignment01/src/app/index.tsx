@@ -15,10 +15,10 @@ import {
   Select,
   SelectBackdrop,
   SelectContent,
-  SelectDragIndicatorWrapper,
   SelectDragIndicator,
-  SelectInput,
+  SelectDragIndicatorWrapper,
   SelectIcon,
+  SelectInput,
   SelectItem,
   SelectPortal,
   SelectTrigger,
@@ -27,7 +27,6 @@ import {
 import dayjs from 'dayjs';
 import { Stack, useRouter } from 'expo-router';
 import { ChevronDownIcon } from 'lucide-react-native';
-import { Satellite } from 'lucide-react-native';
 import { useState } from 'react';
 import { FlatList, LayoutAnimation, LayoutAnimationConfig } from 'react-native';
 
