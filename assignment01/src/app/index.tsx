@@ -106,7 +106,7 @@ const HomeScreen = () => {
     LayoutAnimation.configureNext(LAYOUT_ANIMATION_CONFIG);
 
     toast.show({
-      duration: 20_000,
+      duration: 5_000,
       id: deletedExpense?.id,
       render: () => (
         <UndoExpenseDeletionToast
