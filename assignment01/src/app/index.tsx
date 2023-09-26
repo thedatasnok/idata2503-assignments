@@ -114,8 +114,8 @@ const HomeScreen = () => {
           id={deletedExpense.id}
           title={deletedExpense?.title}
           onUndo={() => {
-            addExpense(deletedExpense);
             toast.close(deletedExpense?.id);
+            addExpense(deletedExpense);
           }}
         />
       ),

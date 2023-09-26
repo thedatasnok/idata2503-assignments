@@ -8,6 +8,7 @@ import {
   VStack,
 } from '@gluestack-ui/themed';
 import { CheckIcon } from 'lucide-react-native';
+import { useState } from 'react';
 
 export interface UndoExpenseDeletionToastProps {
   id: string;
@@ -24,6 +25,14 @@ const UndoExpenseDeletionToast: React.FC<UndoExpenseDeletionToastProps> = ({
   title,
   onUndo,
 }) => {
+  const [isUndone, setIsUndone] = useState(false);
+
+  const handleUndo = () => {
+    setIsUndone(true);
+    if (isUndone) return;
+    onUndo?.();
+  }
+
   return (
     <Toast
       nativeID={id}
@@ -38,7 +47,7 @@ const UndoExpenseDeletionToast: React.FC<UndoExpenseDeletionToastProps> = ({
         <ToastTitle>Deleted expense</ToastTitle>
         <ToastDescription>Expense "{title}" has been deleted</ToastDescription>
       </VStack>
-      <Button size='xs' variant='outline' action='negative' onPress={onUndo}>
+      <Button size='xs' variant='outline' action='negative' onPress={handleUndo}>
         <ButtonText>Undo</ButtonText>
       </Button>
     </Toast>
