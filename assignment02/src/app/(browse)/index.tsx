@@ -1,7 +1,7 @@
 import { Text } from '@gluestack-ui/themed';
 
-const HomeScreen = () => {
+const CategoriesScreen = () => {
   return <Text>Meals app</Text>;
 };
 
-export default HomeScreen;
+export default CategoriesScreen;
