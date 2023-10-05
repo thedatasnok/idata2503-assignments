@@ -4,6 +4,13 @@
 
 ![Use cases](docs/use-cases.drawio.svg)
 
+- As a User I want to list my expenses
+- As a User I want to list my expenses in a given time period
+- As a User I want to view a sum of my expenses by type
+- As a User I want to add an expense
+- As a User I want to remove an expense
+- As a User I want to undo accidental removal of expenses
+
 ## Class diagram & layout/component hierarchy diagram
 
 ![diagram](docs/diagram.drawio.svg)
@@ -27,3 +34,11 @@ Due to the add screen and the view screen being separate routes needing to inter
 
 - Persistent storage of expenses (zustand middleware using AsyncStorage)
 - Period views (this week, this month, this year, total)
+
+## Results
+
+Home screen:
+![home](docs/assets/home-screen.png)
+
+Add screen:
+![add](docs/assets/add-screen.png)
