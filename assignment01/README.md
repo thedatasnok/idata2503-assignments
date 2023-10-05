@@ -37,8 +37,8 @@ Due to the add screen and the view screen being separate routes needing to inter
 
 ## Results
 
-Home screen:
+Home screen:  
 ![home](docs/assets/home-screen.png)
 
-Add screen:
+Add screen:  
 ![add](docs/assets/add-screen.png)
