@@ -27,7 +27,6 @@ import {
 } from '@gluestack-ui/themed';
 import { Stack, useRouter } from 'expo-router';
 import {
-  ArrowLeftIcon,
   CalendarIcon,
   ChevronDownIcon,
   DollarSignIcon,
@@ -83,21 +82,7 @@ const AddExpenseScreen = () => {
 
   return (
     <>
-      <Stack.Screen
-        options={{
-          title: 'Add expense',
-          headerLeft: () => (
-            <Button
-              size='sm'
-              rounded='$full'
-              aspectRatio='1/1'
-              onPress={onCancelled}
-            >
-              <ButtonIcon as={ArrowLeftIcon} size='20' />
-            </Button>
-          ),
-        }}
-      />
+      <Stack.Screen options={{ title: 'Add expense' }} />
 
       <Box p='$2'>
         <FormControl isInvalid={isInvalidTitle}>
