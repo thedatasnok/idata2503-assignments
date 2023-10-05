@@ -4,9 +4,9 @@
 
 ![Use cases](docs/use-cases.drawio.svg)
 
-## Architecture
+## Class diagram & layout/component diagram
 
-![Architecture](docs/architecture.drawio.svg)
+![diagram](docs/diagram.drawio.svg)
 
 ## Project structure
 
@@ -21,7 +21,7 @@ These two screens are rendered within the Stack as defined in the [layout file](
 
 Any shared functionality or abstracted components are moved into the `src/components` directory and other directories outside the `app` directory.
 
-Due to the add screen and the view screen being separate routes needing to interact with a shared piece of state, I use [zustand](https://docs.pmnd.rs/zustand/getting-started/introduction).
+Due to the add screen and the view screen being separate routes needing to interact with a shared piece of state, I use [zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) as opposed to React Context.
 
 ## Additional features
 
