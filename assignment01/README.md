@@ -4,7 +4,7 @@
 
 ![Use cases](docs/use-cases.drawio.svg)
 
-## Class diagram & layout/component diagram
+## Class diagram & layout/component hierarchy diagram
 
 ![diagram](docs/diagram.drawio.svg)
 
