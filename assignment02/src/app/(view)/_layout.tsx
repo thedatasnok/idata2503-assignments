@@ -1,17 +1,17 @@
-import { config } from '@gluestack-ui/themed';
 import { Stack } from 'expo-router';
+import { getToken } from 'tamagui';
 
 const ViewLayout = () => {
   return (
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: config.theme.tokens.colors.blue500,
+          backgroundColor: getToken('$blue10Light'),
         },
-        headerTintColor: config.theme.tokens.colors.blue50,
+        headerTintColor: getToken('$blue1Light'),
         headerTitleStyle: {
-          fontSize: config.theme.tokens.fontSizes.lg,
-          fontWeight: config.theme.tokens.fontWeights.bold,
+          fontSize: getToken('$fontSize.lg'),
+          fontWeight: '600',
         },
         animation: 'slide_from_right',
       }}

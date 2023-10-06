@@ -1,5 +1,5 @@
-import { config } from '@gluestack-ui/themed';
 import { Drawer } from 'expo-router/drawer';
+import { getToken } from 'tamagui';
 
 const BrowseLayout = () => {
   return (
@@ -8,13 +8,13 @@ const BrowseLayout = () => {
       defaultStatus='closed'
       screenOptions={{
         headerStyle: {
-          backgroundColor: config.theme.tokens.colors.blue500,
+          backgroundColor: getToken('$blue10Light'),
         },
         headerTitleStyle: {
-          fontSize: config.theme.tokens.fontSizes.lg,
-          fontWeight: config.theme.tokens.fontWeights.bold,
+          fontSize: getToken('$fontSize.lg'),
+          fontWeight: '600',
         },
-        headerTintColor: config.theme.tokens.colors.blue50,
+        headerTintColor: getToken('$blue1Light'),
       }}
     >
       <Drawer.Screen name='(meals)' options={{ title: 'Meals' }} />

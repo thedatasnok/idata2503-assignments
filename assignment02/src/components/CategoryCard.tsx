@@ -1,7 +1,13 @@
-import { Box } from '@gluestack-ui/themed';
+import { styled, Text, View } from 'tamagui';
+
+const Card = styled(View, {});
 
 const CategoryCard = () => {
-  return <Box p='$2'></Box>;
+  return (
+    <Card>
+      <Text>Yo</Text>
+    </Card>
+  );
 };
 
 export default CategoryCard;

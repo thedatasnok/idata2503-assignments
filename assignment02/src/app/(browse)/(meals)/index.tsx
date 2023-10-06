@@ -1,4 +1,4 @@
-import { Pressable, Text } from '@gluestack-ui/themed';
+import { Button, Text } from 'tamagui';
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 
@@ -30,14 +30,13 @@ const CategoriesScreen = () => {
         data={MOCK_CATEGORIES}
         numColumns={2}
         renderItem={({ item: category }) => (
-          <Pressable
-            bgColor='$red300'
-            h='$32'
-            w='$1/2'
+          <Button
+            height='$20'
+            width='$20'
             onPress={() => gotoCategory(category.id)}
           >
             <Text>{category.name}</Text>
-          </Pressable>
+          </Button>
         )}
       />
     </>

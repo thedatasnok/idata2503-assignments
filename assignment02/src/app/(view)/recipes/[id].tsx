@@ -1,5 +1,4 @@
 import { useRecipe } from '@/hooks';
-import { Text } from '@gluestack-ui/themed';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 
 const RecipeScreen = () => {

@@ -1,5 +1,4 @@
 import { IconType } from '@/utils';
-import { Icon } from '@gluestack-ui/themed';
 
 export interface TabBarIconProps {
   focused: boolean;
@@ -15,8 +14,8 @@ export interface TabBarIconProps {
  *
  * @returns
  */
-const TabBarIcon: React.FC<TabBarIconProps> = ({ color, size, icon }) => {
-  return <Icon as={icon} color={color} size={size} />;
+const TabBarIcon: React.FC<TabBarIconProps> = ({ color, size, icon: Icon }) => {
+  return <Icon color={color} size={size} />;
 };
 
 export default TabBarIcon;
