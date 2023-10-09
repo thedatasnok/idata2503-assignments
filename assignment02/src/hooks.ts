@@ -23,6 +23,10 @@ export const useRecipes = (categoryId: string) => {
           '2. Put the tomato on the dough',
           '3. Put the cheese on the tomato',
         ],
+        approximateMinutes: 30,
+        categories: [],
+        imageUrls: [],
+        allergies: [],
       },
     ],
   };
@@ -31,11 +35,7 @@ export const useRecipes = (categoryId: string) => {
   const allergies = usePreferencesStore((state) => state.allergies);
 
   const filteredRecipes = allRecipes.filter((recipe) => {
-    return true;
-
-    // return !recipe.allergies.some((allergy) =>
-    //   allergies.includes(allergy)
-    // );
+    return !recipe.allergies.some((allergy) => allergies.includes(allergy));
   });
 
   return { category, recipes: filteredRecipes };
@@ -56,5 +56,9 @@ export const useRecipe = (recipeId: string): Recipe => {
     ingredients: ['tomato', 'cheese', 'dough'],
     name: 'Margharita Pizza',
     steps: [],
+    approximateMinutes: 30,
+    categories: [],
+    imageUrls: [],
+    allergies: [],
   };
 };
