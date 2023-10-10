@@ -5,7 +5,7 @@ const MyLinearGradient = styled(
   LinearGradient,
   {},
   {
-    resolveProps: ['colors'],
+    resolveProps: ['colors', 'start', 'end'],
   },
   {
     propertyTokenMap: {
@@ -27,6 +27,11 @@ export interface CategoryCardProps {
   onPress?: () => void;
 }
 
+type Point = LinearGradient['props']['start'];
+
+const GRADIENT_START: any = { x: 0.0, y: 0.0 } satisfies Point;
+const GRADIENT_END: any = { x: 1.0, y: 0.0 } satisfies Point;
+
 const CategoryCard: React.FC<CategoryCardProps> = ({ name, onPress }) => {
   const emitPress = () => onPress?.();
 
@@ -34,13 +39,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, onPress }) => {
     <Pressable onPress={emitPress}>
       <MyLinearGradient
         h='$20'
-        aspectRatio={1}
+        start={GRADIENT_START}
+        end={GRADIENT_END}
         display='flex'
         alignItems='center'
         justifyContent='center'
-        colors={['$primary900', '$primary100']}
+        rounded={'$md'}
+        colors={['#ee2a7b', '#ff7db8']}
       >
-        <Text>{name}</Text>
+        <Text fontWeight='$medium'>{name}</Text>
       </MyLinearGradient>
     </Pressable>
   );
