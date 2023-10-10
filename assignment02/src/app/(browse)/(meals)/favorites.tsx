@@ -1,4 +1,4 @@
-import { Text } from 'tamagui';
+import { Text } from '@gluestack-ui/themed';
 
 const FavoritesScreen = () => {
   return (

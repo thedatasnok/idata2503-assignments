@@ -7,14 +7,6 @@ module.exports = function (api) {
     plugins: [
       require.resolve('expo-router/babel'),
       'transform-inline-environment-variables',
-      // [
-      //   '@tamagui/babel-plugin',
-      //   {
-      //     components: ['tamagui'],
-      //     config: './src/config/tamagui.ts',
-      //     logTimings: true,
-      //   },
-      // ],
       'react-native-reanimated/plugin',
     ],
   };

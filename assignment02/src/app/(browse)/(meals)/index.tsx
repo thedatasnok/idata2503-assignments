@@ -1,4 +1,4 @@
-import { Button, Text } from 'tamagui';
+import CategoryCard from '@/components/CategoryCard';
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 
@@ -30,13 +30,11 @@ const CategoriesScreen = () => {
         data={MOCK_CATEGORIES}
         numColumns={2}
         renderItem={({ item: category }) => (
-          <Button
-            height='$20'
-            width='$20'
+          <CategoryCard
+            key={category.id}
+            name={category.name}
             onPress={() => gotoCategory(category.id)}
-          >
-            <Text>{category.name}</Text>
-          </Button>
+          />
         )}
       />
     </>

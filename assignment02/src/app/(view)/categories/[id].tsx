@@ -1,6 +1,6 @@
 import { useRecipes } from '@/hooks';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
-import { Text } from 'tamagui';
+import { Text } from '@gluestack-ui/themed';
 import { Pressable } from 'react-native';
 
 const CategoryScreen = () => {
