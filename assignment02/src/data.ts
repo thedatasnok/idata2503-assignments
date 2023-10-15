@@ -17,6 +17,7 @@ export const recipes: Recipe[] = [
     categories: [categoryMap.italian],
     ingredients: [],
     steps: [],
+    allergies: [],
   },
 ];
 
