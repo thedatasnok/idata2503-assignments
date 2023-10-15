@@ -1,6 +1,22 @@
 import { categories, recipes } from './data';
 import { usePreferencesStore } from './store/preferences';
-import { Recipe } from './types';
+import { Category, Recipe } from './types';
+
+type UseCategories = () => { categories?: Category[] };
+
+/**
+ * Hook for finding all categories.
+ *
+ * @returns an object containing all categories
+ */
+export const useCategories: UseCategories = () => {
+  return { categories };
+};
+
+type UseRecipes = (categoryId: string) => {
+  category?: Category;
+  recipes: Recipe[];
+};
 
 /**
  * Hook for finding recipes by category id, matching a users allergies or preferences.
@@ -9,10 +25,10 @@ import { Recipe } from './types';
  *
  * @returns an object containing the category and the recipes
  */
-export const useRecipes = (categoryId: string) => {
+export const useRecipes: UseRecipes = (categoryId) => {
   const category = categories.find((category) => category.id === categoryId);
 
-  if (!category) return { category: null, recipes: [] };
+  if (!category) return { category: undefined, recipes: [] };
 
   const allRecipes: Recipe[] = category.recipes;
   const tags = usePreferencesStore((state) => state.tags);
@@ -31,6 +47,8 @@ export const useRecipes = (categoryId: string) => {
   return { category, recipes: filteredRecipes };
 };
 
+type UseRecipe = (recipeId: string) => Recipe | undefined;
+
 /**
  * Hook for finding a given recipe by its id.
  *
@@ -38,7 +56,7 @@ export const useRecipes = (categoryId: string) => {
  *
  * @returns an objecct containing the recipe
  */
-export const useRecipe = (recipeId: string): Recipe | undefined => {
+export const useRecipe: UseRecipe = (recipeId) => {
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
 
   return recipe;

@@ -1,23 +1,9 @@
 import CategoryCard from '@/components/CategoryCard';
 import { getToken } from '@/config/gluestack';
+import { useCategories } from '@/hooks';
 import { Box } from '@gluestack-ui/themed';
 import { useRouter } from 'expo-router';
 import { DimensionValue, FlatList, StyleProp, ViewStyle } from 'react-native';
-
-const MOCK_CATEGORIES = [
-  {
-    id: 'italian',
-    name: 'Italian',
-  },
-  {
-    id: 'chinese',
-    name: 'Chinese',
-  },
-  {
-    id: 'indian',
-    name: 'Indian',
-  },
-];
 
 const COLUMN_WRAPPER_STYLE: StyleProp<ViewStyle> = {
   justifyContent: 'space-between',
@@ -31,6 +17,7 @@ const FLATLIST_STYLE: StyleProp<ViewStyle> = {
 
 const CategoriesScreen = () => {
   const router = useRouter();
+  const { categories } = useCategories();
 
   const gotoCategory = (categoryId: string) => {
     router.push(`/categories/${categoryId}`);
@@ -39,7 +26,7 @@ const CategoriesScreen = () => {
   return (
     <>
       <FlatList
-        data={MOCK_CATEGORIES}
+        data={categories}
         numColumns={2}
         columnWrapperStyle={COLUMN_WRAPPER_STYLE}
         style={FLATLIST_STYLE}
@@ -48,6 +35,7 @@ const CategoriesScreen = () => {
             <CategoryCard
               name={category.name}
               onPress={() => gotoCategory(category.id)}
+              colors={category.colors}
             />
           </Box>
         )}
