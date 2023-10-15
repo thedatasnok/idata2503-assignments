@@ -1,5 +1,6 @@
+import { categories, recipes } from './data';
 import { usePreferencesStore } from './store/preferences';
-import { Category, Recipe } from './types';
+import { Recipe } from './types';
 
 /**
  * Hook for finding recipes by category id, matching a users allergies or preferences.
@@ -9,33 +10,22 @@ import { Category, Recipe } from './types';
  * @returns an object containing the category and the recipes
  */
 export const useRecipes = (categoryId: string) => {
-  // TODO: Find allRecipes from category id
-  const category: Category = {
-    id: 'italian',
-    name: 'Italian',
-    recipes: [
-      {
-        id: 'margharita-pizza',
-        ingredients: ['tomato', 'cheese', 'dough'],
-        name: 'Margharita Pizza',
-        steps: [
-          '1. Put the dough in the oven',
-          '2. Put the tomato on the dough',
-          '3. Put the cheese on the tomato',
-        ],
-        approximateMinutes: 30,
-        categories: [],
-        imageUrls: [],
-        allergies: [],
-      },
-    ],
-  };
+  const category = categories.find((category) => category.id === categoryId);
+
+  if (!category) return { category: null, recipes: [] };
 
   const allRecipes: Recipe[] = category.recipes;
-  const allergies = usePreferencesStore((state) => state.allergies);
+  const tags = usePreferencesStore((state) => state.tags);
 
   const filteredRecipes = allRecipes.filter((recipe) => {
-    return !recipe.allergies.some((allergy) => allergies.includes(allergy));
+    if (tags.length === 0) return true;
+
+    const matches = tags.reduce((acc, tag) => {
+      if (recipe.tags.has(tag)) return acc + 1;
+      return acc;
+    }, 0);
+
+    return matches === tags.length;
   });
 
   return { category, recipes: filteredRecipes };
@@ -48,17 +38,8 @@ export const useRecipes = (categoryId: string) => {
  *
  * @returns an objecct containing the recipe
  */
-export const useRecipe = (recipeId: string): Recipe => {
-  // TODO: Wire up to the same data as useRecipes uses
+export const useRecipe = (recipeId: string): Recipe | undefined => {
+  const recipe = recipes.find((recipe) => recipe.id === recipeId);
 
-  return {
-    id: 'margharita-pizza',
-    ingredients: ['tomato', 'cheese', 'dough'],
-    name: 'Margharita Pizza',
-    steps: [],
-    approximateMinutes: 30,
-    categories: [],
-    imageUrls: [],
-    allergies: [],
-  };
+  return recipe;
 };

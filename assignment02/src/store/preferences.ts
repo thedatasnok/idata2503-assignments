@@ -1,18 +1,19 @@
+import { PreferenceTag } from '@/types';
 import { create } from 'zustand';
 
 export interface PreferencesState {
-  allergies: string[];
+  tags: PreferenceTag[];
 }
 
 export interface PreferencesActions {
-  addAllergy: (allergy: string) => void;
-  removeAllergy: (allergy: string) => void;
+  addPreference: (preference: string) => void;
+  removePreference: (preference: string) => void;
 }
 
 export type PreferencesStore = PreferencesState & PreferencesActions;
 
 export const usePreferencesStore = create<PreferencesStore>((_set, _get) => ({
-  allergies: [],
-  addAllergy: (allergy) => {},
-  removeAllergy: (allergy) => {},
+  tags: [],
+  addPreference: (preference) => {},
+  removePreference: (preference) => {},
 }));
