@@ -1,19 +1,26 @@
-import { Recipe } from '@/types';
 import { create } from 'zustand';
 
 export interface UserFavoriteState {
-  favorites: Recipe[];
+  favorites: string[];
 }
 
 export interface UserFavoriteActions {
-  addFavorite: (recipe: Recipe) => void;
-  removeFavorite: (recipe: Recipe) => void;
+  addFavorite: (recipeId: string) => void;
+  removeFavorite: (recipeId: string) => void;
 }
 
 export type UserFavoriteStore = UserFavoriteState & UserFavoriteActions;
 
 export const useUserFavoriteStore = create<UserFavoriteStore>((set, get) => ({
   favorites: [],
-  addFavorite: (recipe) => {},
-  removeFavorite: (recipe) => {},
+  addFavorite: (recipe) => {
+    set({
+      favorites: [...get().favorites, recipe],
+    });
+  },
+  removeFavorite: (recipe) => {
+    set({
+      favorites: get().favorites.filter((r) => r !== recipe),
+    });
+  },
 }));

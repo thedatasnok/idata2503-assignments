@@ -1,4 +1,5 @@
 import { categories, recipes } from './data';
+import { useUserFavoriteStore } from './store/favorites';
 import { usePreferencesStore } from './store/preferences';
 import { Category, Recipe } from './types';
 
@@ -54,10 +55,58 @@ type UseRecipe = (recipeId: string) => Recipe | undefined;
  *
  * @param recipeId the id of the recipe
  *
- * @returns an objecct containing the recipe
+ * @returns an object containing the recipe
  */
 export const useRecipe: UseRecipe = (recipeId) => {
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
 
   return recipe;
+};
+
+type UseFavorites = () => {
+  recipes?: Recipe[];
+};
+
+/**
+ * Hook for finding all recipes that are marked as favorites.
+ *
+ * @returns an object containing all favorite recipes
+ */
+export const useFavorites: UseFavorites = () => {
+  const favorites = useUserFavoriteStore((state) => state.favorites);
+
+  const favoriteRecipes = recipes.filter((recipe) => {
+    return favorites.includes(recipe.id);
+  });
+
+  return { recipes: favoriteRecipes };
+};
+
+type UseFavorited = (recipeId: string) => {
+  isFavorited: boolean;
+  toggleFavorited: () => void;
+};
+
+/**
+ * Hook for managing the favorited state of a recipe.
+ *
+ * @param recipeId the id of the recipe to check
+ *
+ * @returns an object containing the favorited state and a function to toggle it
+ */
+export const useFavorited: UseFavorited = (recipeId) => {
+  const favorites = useUserFavoriteStore((state) => state.favorites);
+  const favoriteStore = useUserFavoriteStore();
+
+  const isFavorited = favorites.includes(recipeId);
+
+  const toggleFavorited = () => {
+    if (isFavorited) {
+      favoriteStore.removeFavorite(recipeId);
+    } else {
+      favoriteStore.addFavorite(recipeId);
+    }
+  };
+
+  return { isFavorited, toggleFavorited };
 };
