@@ -22,20 +22,20 @@ export interface Recipe {
 }
 
 export const enum Affordability {
-  AFFORDABLE = 'affordable',
-  PRICEY = 'pricey',
-  LUXURIOUS = 'luxurious',
+  AFFORDABLE = 'Affordable',
+  PRICEY = 'Pricey',
+  LUXURIOUS = 'Luxurious',
 }
 
 export const enum Complexity {
-  SIMPLE = 'simple',
-  CHALLENGING = 'challenging',
-  HARD = 'hard',
+  SIMPLE = 'Simple',
+  CHALLENGING = 'Challenging',
+  HARD = 'Hard',
 }
 
 export const enum PreferenceTag {
-  LACTOSE_FREE = 'lactose-free',
-  GLUTEN_FREE = 'gluten-free',
-  VEGAN = 'vegan',
-  VEGETARIAN = 'vegetarian',
+  LACTOSE_FREE = 'Lactose-free',
+  GLUTEN_FREE = 'Gluten-free',
+  VEGAN = 'Vegan',
+  VEGETARIAN = 'Vegetarian',
 }
