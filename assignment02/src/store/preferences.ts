@@ -6,14 +6,22 @@ export interface PreferencesState {
 }
 
 export interface PreferencesActions {
-  addPreference: (preference: string) => void;
-  removePreference: (preference: string) => void;
+  addPreference: (preference: PreferenceTag) => void;
+  removePreference: (preference: PreferenceTag) => void;
 }
 
 export type PreferencesStore = PreferencesState & PreferencesActions;
 
-export const usePreferencesStore = create<PreferencesStore>((_set, _get) => ({
+export const usePreferencesStore = create<PreferencesStore>((set, get) => ({
   tags: [],
-  addPreference: (preference) => {},
-  removePreference: (preference) => {},
+  addPreference: (preference) => {
+    set({
+      tags: [...get().tags, preference],
+    });
+  },
+  removePreference: (preference) => {
+    set({
+      tags: get().tags.filter((p) => p !== preference),
+    });
+  },
 }));

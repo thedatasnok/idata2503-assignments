@@ -1,7 +1,7 @@
 import { categories, recipes } from './data';
 import { useUserFavoriteStore } from './store/favorites';
 import { usePreferencesStore } from './store/preferences';
-import { Category, Recipe } from './types';
+import { Category, PreferenceTag, Recipe } from './types';
 
 type UseCategories = () => { categories?: Category[] };
 
@@ -109,4 +109,24 @@ export const useFavorited: UseFavorited = (recipeId) => {
   };
 
   return { isFavorited, toggleFavorited };
+};
+
+type UsePreferences = () => {
+  tags: PreferenceTag[];
+  togglePreference: (tag: PreferenceTag) => void;
+};
+
+export const usePreferences: UsePreferences = () => {
+  const tags = usePreferencesStore((state) => state.tags);
+  const preferencesStore = usePreferencesStore();
+
+  const togglePreference = (tag: PreferenceTag) => {
+    if (tags.includes(tag)) {
+      preferencesStore.removePreference(tag);
+    } else {
+      preferencesStore.addPreference(tag);
+    }
+  };
+
+  return { tags, togglePreference };
 };
