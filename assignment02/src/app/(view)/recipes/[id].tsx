@@ -5,6 +5,7 @@ import {
   Icon,
   Image,
   Pressable,
+  ScrollView,
   Text,
   styled,
 } from '@gluestack-ui/themed';
@@ -60,32 +61,34 @@ const RecipeScreen = () => {
         }}
       />
 
-      <Image
-        rounded='$md'
-        h='$48'
-        source={recipe.imageUrls[0]}
-        alt={recipe.name}
-      />
+      <ScrollView>
+        <Image
+          rounded='$md'
+          h='$48'
+          source={recipe.imageUrls[0]}
+          alt={recipe.name}
+        />
 
-      <Box alignItems='center'>
-        <Box py='$1' alignItems='center' w='$3/4'>
-          <Text fontWeight='$bold' fontSize='$xl'>
-            Ingredients
-          </Text>
+        <Box alignItems='center'>
+          <Box py='$1' alignItems='center' w='$3/4'>
+            <Text fontWeight='$bold' fontSize='$xl'>
+              Ingredients
+            </Text>
 
-          <Text fontWeight='$normal' fontSize='$md' textAlign='center'>
-            {recipe.ingredients.join('\n')}
-          </Text>
+            <Text fontWeight='$normal' fontSize='$md' textAlign='center'>
+              {recipe.ingredients.join('\n')}
+            </Text>
 
-          <Text fontWeight='$bold' fontSize='$xl' mt='$2'>
-            Steps
-          </Text>
+            <Text fontWeight='$bold' fontSize='$xl' mt='$2'>
+              Steps
+            </Text>
 
-          <Text fontWeight='$normal' fontSize='$md' textAlign='center'>
-            {recipe.steps.join('\n\n')}
-          </Text>
+            <Text fontWeight='$normal' fontSize='$md' textAlign='center'>
+              {recipe.steps.join('\n\n')}
+            </Text>
+          </Box>
         </Box>
-      </Box>
+      </ScrollView>
     </>
   );
 };
