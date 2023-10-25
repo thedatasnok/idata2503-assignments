@@ -1,5 +1,5 @@
 import { getToken } from '@/config/gluestack';
-import { useFavorited, useRecipe } from '@/hooks';
+import { useFavorited, useIncompatible, useRecipe } from '@/hooks';
 import {
   Box,
   Icon,
@@ -31,6 +31,7 @@ const RecipeScreen = () => {
   const router = useRouter();
   const recipe = useRecipe(id as string);
   const { isFavorited, toggleFavorited } = useFavorited(id as string);
+  const { incompatible, reason } = useIncompatible(recipe);
   const toast = useToast();
 
   if (typeof id !== 'string') {
@@ -63,7 +64,9 @@ const RecipeScreen = () => {
           my='$2'
           p='$2'
         >
-          <Text fontWeight='$semibold' color='$gray950'>{content}</Text>
+          <Text fontWeight='$semibold' color='$gray950'>
+            {content}
+          </Text>
         </Box>
       ),
     });
@@ -96,6 +99,33 @@ const RecipeScreen = () => {
 
       <ScrollView>
         <ImageCarousel images={recipe.imageUrls} recipe={recipe.name} />
+
+        {incompatible && (
+          <Box
+            p='$2'
+            mt='$2'
+            alignItems='center'
+            alignSelf='center'
+            bg='$error100'
+            borderWidth='$1'
+            borderColor='$error300'
+            rounded='$md'
+          >
+            <Text
+              textTransform='uppercase'
+              color='$error950'
+              fontWeight='$semibold'
+            >
+              This meal is not aligned with your preferences
+            </Text>
+
+            {reason.map((r) => (
+              <Text key={r} color='$error950'>
+                {r}
+              </Text>
+            ))}
+          </Box>
+        )}
 
         <Box alignItems='center'>
           <Box py='$1' alignItems='center' w='$3/4'>

@@ -116,6 +116,11 @@ type UsePreferences = () => {
   togglePreference: (tag: PreferenceTag) => void;
 };
 
+/**
+ * Hook for managing the users preferences.
+ *
+ * @returns an object containing the users preferences and a function to toggle them
+ */
 export const usePreferences: UsePreferences = () => {
   const tags = usePreferencesStore((state) => state.tags);
   const preferencesStore = usePreferencesStore();
@@ -129,4 +134,31 @@ export const usePreferences: UsePreferences = () => {
   };
 
   return { tags, togglePreference };
+};
+
+type UseIncompatible = (recipe?: Recipe) => {
+  incompatible: boolean;
+  reason: PreferenceTag[];
+};
+
+/**
+ * Hook for checking if a recipe is incompatible with the users preferences.
+ * If a recipe is provided, but is not marked with one of the users preferences,
+ * it is considered incompatible.
+ *
+ * @param recipe the recipe to check
+ *
+ * @returns an object containing the incompatible state and the tags that are not present
+ */
+export const useIncompatible: UseIncompatible = (recipe) => {
+  const tags = usePreferencesStore((state) => state.tags);
+
+  const tagsNotPresent = recipe
+    ? tags.filter((tag) => !recipe.tags.has(tag))
+    : [];
+
+  return {
+    incompatible: tagsNotPresent.length > 0,
+    reason: tagsNotPresent,
+  };
 };
