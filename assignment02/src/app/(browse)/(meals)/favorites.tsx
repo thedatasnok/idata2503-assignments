@@ -24,6 +24,7 @@ const FavoritesScreen = () => {
       <FlatList
         data={recipes}
         style={FLATLIST_STYLE}
+        ItemSeparatorComponent={() => <Box h='$2' />}
         ListEmptyComponent={() => (
           <Box h='$96' justifyContent='center' alignItems='center' px='$4'>
             {/* @ts-ignore */}

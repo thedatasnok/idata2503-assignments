@@ -3,6 +3,7 @@ import { GluestackUIProvider, Text } from '@gluestack-ui/themed';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Suspense } from 'react';
+import 'react-native-gesture-handler';
 
 export default function App() {
   return (
