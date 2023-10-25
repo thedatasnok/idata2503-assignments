@@ -28,7 +28,7 @@ These two screens are rendered within the Stack as defined in the [layout file](
 
 Any shared functionality or abstracted components are moved into the `src/components` directory and other directories outside the `app` directory.
 
-Due to the add screen and the view screen being separate routes needing to interact with a shared piece of state, I use [zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) as opposed to React Context.
+The add and view screen need to interact with a shared piece of state, for this I use [zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) as opposed to React Context.
 
 ## Additional features
 
