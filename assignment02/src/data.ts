@@ -6,68 +6,70 @@ import {
   Recipe,
 } from './types';
 
-const categoryMap: Record<string, Category> = {
+const categoryMap = {
   italian: {
     id: 'italian',
     name: 'Italian',
     recipes: [],
     colors: ['#FF6E7F', '#FFBBB0'],
-  },
+  } as Category,
   quickAndEasy: {
     id: 'quickAndEasy',
     name: 'Quick & Easy',
     recipes: [],
     colors: ['#72E6D5', '#B2F7FF'],
-  },
+  } as Category,
   hamburgers: {
     id: 'hamburgers',
     name: 'Hamburgers',
     recipes: [],
     colors: ['#FFD452', '#FF914D'],
-  },
+  } as Category,
   german: {
     id: 'german',
     name: 'German',
     recipes: [],
     colors: ['#9652FF', '#B091FF'],
-  },
+  } as Category,
   lightAndLovely: {
     id: 'lightAndLovely',
     name: 'Light & Lovely',
     recipes: [],
     colors: ['#FFE05A', '#E7FFD8'],
-  },
+  } as Category,
   exotic: {
     id: 'exotic',
     name: 'Exotic',
     recipes: [],
     colors: ['#FFA359', '#FFEBB0'],
-  },
+  } as Category,
   breakfast: {
     id: 'breakfast',
     name: 'Breakfast',
     recipes: [],
     colors: ['#FFD13F', '#FFABAB'],
-  },
+  } as Category,
   asian: {
     id: 'asian',
     name: 'Asian',
     recipes: [],
     colors: ['#FF6D77', '#FFC0A4'],
-  },
+  } as Category,
   french: {
     id: 'french',
     name: 'French',
     recipes: [],
     colors: ['#6D75FF', '#B2A1FF'],
-  },
+  } as Category,
   summer: {
     id: 'summer',
     name: 'Summer',
     recipes: [],
     colors: ['#FF8C42', '#FFC77A'],
-  },
+  } as Category,
 };
+
+type CategoryKey = keyof typeof categoryMap;
 
 export const recipes: Recipe[] = [
   {
@@ -197,7 +199,7 @@ export const recipes: Recipe[] = [
       categoryMap.summer,
     ],
     imageUrls: [
-      'https://cdn.pixabay.com/photo/2016/10/25/13/01/bowl-1768858_1280.jpg',
+      'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
     ],
     ingredients: [
       'Arugula',
@@ -232,6 +234,10 @@ export const recipes: Recipe[] = [
     categories: [categoryMap.exotic, categoryMap.summer],
     imageUrls: [
       'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
+      'https://i.ytimg.com/vi/ba_3ICebDoo/maxresdefault.jpg',
+      'https://i.ytimg.com/vi/NDASm_SIBbg/maxresdefault.jpg',
+      'https://images.eatsmarter.com/sites/default/files/styles/max_size/public/orange-mousse-622568.jpg',
+      'https://d3lp4xedbqa8a5.cloudfront.net/s3/digital-cougar-assets/GourmetTraveller/2013/05/09/12424/1207orangemousse-628.jpg',
     ],
     ingredients: [
       '4 Sheets of Gelatine',
@@ -396,7 +402,7 @@ export const recipes: Recipe[] = [
 
 recipes.forEach((recipe) => {
   recipe.categories.forEach((category) =>
-    categoryMap[category.id].recipes.push(recipe)
+    categoryMap[category.id as CategoryKey].recipes.push(recipe)
   );
 });
 
