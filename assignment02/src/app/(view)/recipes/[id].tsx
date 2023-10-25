@@ -45,8 +45,8 @@ const RecipeScreen = () => {
 
   const handleFavorite = () => {
     const content = isFavorited
-      ? 'Added to favorites'
-      : 'Removed from favorites';
+      ? 'Removed from favorites'
+      : 'Added to favorites';
 
     toast.closeAll();
 
