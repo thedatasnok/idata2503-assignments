@@ -8,6 +8,7 @@ import {
   ScrollView,
   Text,
   styled,
+  useToast,
 } from '@gluestack-ui/themed';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { HeartIcon } from 'lucide-react-native';
@@ -23,11 +24,14 @@ const FavoriteIcon = styled(Icon, {
   },
 });
 
+const TOAST_DURATION = 5_000;
+
 const RecipeScreen = () => {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const recipe = useRecipe(id as string);
   const { isFavorited, toggleFavorited } = useFavorited(id as string);
+  const toast = useToast();
 
   if (typeof id !== 'string') {
     router.push('/');
@@ -38,6 +42,34 @@ const RecipeScreen = () => {
     router.push('/');
     return null;
   }
+
+  const handleFavorite = () => {
+    const content = isFavorited
+      ? 'Added to favorites'
+      : 'Removed from favorites';
+
+    toast.closeAll();
+
+    toast.show({
+      duration: TOAST_DURATION,
+      placement: 'bottom',
+      render: () => (
+        <Box
+          bg='$gray200'
+          borderWidth='$1'
+          borderColor='$gray300'
+          w='$96'
+          rounded='$md'
+          my='$2'
+          p='$2'
+        >
+          <Text fontWeight='$semibold' color='$gray950'>{content}</Text>
+        </Box>
+      ),
+    });
+
+    toggleFavorited();
+  };
 
   // workaround as styled does not respect the fill property if set
   const fill = isFavorited
@@ -50,7 +82,7 @@ const RecipeScreen = () => {
         options={{
           title: recipe.name,
           headerRight: () => (
-            <Pressable onPress={toggleFavorited}>
+            <Pressable onPress={handleFavorite}>
               {/* @ts-ignore */}
               <FavoriteIcon
                 as={HeartIcon}
